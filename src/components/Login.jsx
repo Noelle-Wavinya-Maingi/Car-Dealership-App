@@ -1,51 +1,66 @@
-import { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from "react";
 import axios from "axios";
 import loginImage from "../assets/Login.png";
 import signupImage from "../assets/Signup.png";
 import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "../context/UserContext";
 
 const Login = () => {
-  // State to toggle between login and signup forms
-  const [isLogin, setIsLogin] = useState(true);
+  const { setUser } = useUser();
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLogin, setIsLogin] = useState(true);
 
-  // Function to toggle between login and signup forms
+  useEffect(() => {
+    const storedUser = localStorage.getItem("currentUser");
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      setUser(user);
+      // Redirect based on user role if storedUser exists
+      if (user.role === "admin") {
+        navigate("/admin-dashboard");
+      } else if (user.role === "manager") {
+        navigate("/manager-dashboard");
+      } else if (user.role === "employee") {
+        navigate("/employee-dashboard");
+      } else {
+        return;
+      }
+    }
+  }, [navigate]);
+
   const toggleForm = () => {
+    setName("");
+    setEmail("");
+    setPassword("");
     setIsLogin(!isLogin);
   };
 
-  // Handle login form submission
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      // Fetch user data based on email and password
       const res = await axios.get(
         `https://json-server-vkfa.onrender.com/users?email=${email}&password=${password}`
       );
-
-      // Extract the first user from response data
       const user = res.data[0];
 
-      // If user exists, log them in and redirect based on role
       if (user) {
+        // Store user in localStorage
+        localStorage.setItem("currentUser", JSON.stringify(user));
+        setUser(user);
         alert("Login successful!");
-        switch (user.role) {
-            case "admin":
-              navigate("/admin-dashboard");
-              break;
-            case "manager":
-              navigate("/manager-dashboard");
-              break;
-            case "employee":
-              navigate("/employee-dashboard");
-              break;
-            default:
-              alert("Unknown role. Please contact support.");
-              break;
-          }
+
+        // Redirect based on user role
+        if (user.role === "admin") {
+          navigate("/admin-dashboard");
+        } else if (user.role === "manager") {
+          navigate("/manager-dashboard");
+        } else {
+          navigate("/employee-dashboard");
+        }
       } else {
         alert("Invalid credentials. Please try again!");
       }
@@ -55,37 +70,30 @@ const Login = () => {
     }
   };
 
-  // Handle signup form submission
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      // Fetch the last user ID to generate a new ID for the new user
       const lastUserRes = await axios.get(
         "https://json-server-vkfa.onrender.com/users?_sort=id&_order=desc&_limit=1"
       );
-
       const lastUserId =
         lastUserRes.data.length > 0 ? lastUserRes.data[0].id + 1 : 1;
 
-      // Create a new user object with default role as "employee"
       const newUser = {
         id: lastUserId,
         name: name,
         email: email,
         password: password,
-        role: "employee", // Default role for new users
+        role: "employee",
       };
 
-      // Post the new user data to the server
       const res = await axios.post(
         `https://json-server-vkfa.onrender.com/users`,
         newUser
       );
 
-      // Show success message and reset form state
       alert("Signup successful. Please login to continue.");
-      setIsLogin(true);
-
+      toggleForm();
       console.log("New user: ", res.data);
     } catch (error) {
       console.error("Error signing up: ", error);
@@ -95,16 +103,13 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      {/* Conditionally apply classes for sliding effect based on isLogin state */}
       <div
         className={`form-container ${isLogin ? "slide-login" : "slide-signup"}`}
       >
         <div className="form-content">
-          {/* Render login form if isLogin is true */}
           {isLogin ? (
             <>
               <div className="image-container">
-                {/* Display login image */}
                 <img src={loginImage} alt="Login" className="auth-image" />
               </div>
               <div className="form-fields">
@@ -135,7 +140,6 @@ const Login = () => {
               </div>
             </>
           ) : (
-            // Render signup form if isLogin is false
             <>
               <div className="form-fields">
                 <h2>Sign Up</h2>
@@ -171,7 +175,6 @@ const Login = () => {
                 </p>
               </div>
               <div className="image-container">
-                {/* Display signup image */}
                 <img src={signupImage} alt="Sign Up" className="auth-image" />
               </div>
             </>

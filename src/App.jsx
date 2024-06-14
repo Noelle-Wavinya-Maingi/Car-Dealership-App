@@ -1,34 +1,47 @@
-// import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { UserProvider } from "./context/UserContext";
 import LandingPage from "./components/LandingPage";
 import Navbar from "./components/Navbar";
-import "./App.css";
 import Login from "./components/Login";
 import RoleManagement from "./components/RoleManagement";
-import { UserProvider } from "./context/UserContext";
 import Dashboard from "./components/Dashboard";
 import AdminDashboard from "./components/AdminDashboard";
 import EmployeeDashboard from "./components/EmployeeDashboard";
 import ManagerDashboard from "./components/ManagerDashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
+import "./App.css";
+import Logout from "./components/Logout";
 
 const App = () => {
   return (
     <Router>
       <UserProvider>
-      <Navbar />
-      <br></br>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/role-management" element={<RoleManagement />} />
-        <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />
-        <Route path="/manager-dashboard" element={<ManagerDashboard />} />
-      </Routes>
+        <Navbar />
+        <Routes>
+          <Route exact path="/" element={<LandingPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/role-management" element={<RoleManagement />} />
+          <Route
+            path="/employee-dashboard"
+            element={
+              <ProtectedRoute component={EmployeeDashboard} role="employee" />
+            }
+          />
+          <Route
+            path="/admin-dashboard"
+            element={<ProtectedRoute component={AdminDashboard} role="admin" />}
+          />
+          <Route
+            path="/manager-dashboard"
+            element={
+              <ProtectedRoute component={ManagerDashboard} role="manager" />
+            }
+          />
+          <Route path="/logout" element={<Logout />} />
+        </Routes>
       </UserProvider>
     </Router>
-    
   );
 };
 

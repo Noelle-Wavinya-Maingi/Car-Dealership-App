@@ -1,11 +1,12 @@
-// import React from 'react';
 import { Link, useLocation } from "react-router-dom";
+import { useUser } from "../context/UserContext";
 
 const Navbar = () => {
   const location = useLocation();
+  const { user } = useUser();
 
-  // Check if current route is '/signup' or '/login'
-  const showNavbar = !["/signup", "/login"].includes(location.pathname);
+  // Check if current route is '/signup', '/login', or '/'
+  const showNavbar = !["/signup", "/login", "/"].includes(location.pathname);
 
   if (!showNavbar) {
     return null;
@@ -35,11 +36,13 @@ const Navbar = () => {
           id="navbarNav"
         >
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link className="nav-link" to="/">
-                Home
-              </Link>
-            </li>
+            {!user && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/">
+                  Home
+                </Link>
+              </li>
+            )}
             <li className="nav-item">
               <Link className="nav-link" to="/services">
                 Services
@@ -55,11 +58,19 @@ const Navbar = () => {
                 Contact
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/login">
-                Login
-              </Link>
-            </li>
+            {!user ? (
+              <li className="nav-item">
+                <Link className="nav-link" to="/login">
+                  Login
+                </Link>
+              </li>
+            ) : (
+              <li className="nav-item">
+                <Link className="nav-link" to="/logout">
+                  Logout
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>
