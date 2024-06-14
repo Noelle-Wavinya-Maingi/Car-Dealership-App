@@ -1,0 +1,201 @@
+@import url("https://fonts.googleapis.com/css2?family=Reddit+Sans+Condensed:wght@200..900&family=Sedan:ital@0;1&display=swap");
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: "Sedan", serif;
+}
+
+body {
+  background: linear-gradient(to right, #a0a1a4, #ffffff);
+  background-size: 200% 100%;
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+/* Navbar Styling */
+.navbar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  list-style: none;
+  justify-content: center;
+}
+
+.navbar-nav .nav-link {
+  color: #c3c3c3;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #007bff;
+}
+
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  position: relative;
+}
+
+.hero-left {
+  flex: 1;
+  text-align: left;
+  padding-right: 20px;
+}
+
+.hero-left h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.hero-left p {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-left .btn {
+  font-size: 1.2rem;
+}
+
+.hero-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.hero-right .background-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0.5;
+}
+
+.hero-image {
+  width: 140%;
+  height: auto;
+  z-index: 2;
+}
+
+.btn {
+  background-color: #c0c0c0;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: row;
+  transition: transform 0.6s ease-in-out;
+}
+
+.form-content {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.image-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}
+
+.auth-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.form-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.slide-login {
+  transform: translateX(0);
+}
+
+.slide-signup {
+  transform: translateZ(-100%);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 10px;
+}
+
+input:first-child {
+  margin-top: 30px;
+}
+
+button {
+  padding: 0.7rem;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+p {
+  margin-top: 1rem;
+}
