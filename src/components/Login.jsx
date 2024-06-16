@@ -5,6 +5,7 @@ import loginImage from "../assets/Login.png";
 import signupImage from "../assets/Signup.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
+import { fetchUsers } from "./api";
 
 const Login = () => {
   const { setUser } = useUser();
@@ -42,10 +43,10 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.get(
-        `https://json-server-vkfa.onrender.com/users?email=${email}&password=${password}`
+      const users = await fetchUsers();
+      const user = users.find(
+        (u) => u.email == email && u.password === password
       );
-      const user = res.data[0];
 
       if (user) {
         // Store user in localStorage
@@ -73,11 +74,9 @@ const Login = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const lastUserRes = await axios.get(
-        "https://json-server-vkfa.onrender.com/users?_sort=id&_order=desc&_limit=1"
-      );
+      const users = await fetchUsers();
       const lastUserId =
-        lastUserRes.data.length > 0 ? lastUserRes.data[0].id + 1 : 1;
+        users.length > 0 ? Math.max(...users.map((u) => u.id)) + 1 : 1;
 
       const newUser = {
         id: lastUserId,
