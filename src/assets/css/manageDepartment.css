@@ -21,7 +21,7 @@ body {
   flex-grow: 1;
   padding: 10px;
   border: 1px solid #ced4da;
-  border-radius: 4px 0 0 4px;
+  border-radius: 7px;
 }
 
 .input-group button {
@@ -29,9 +29,10 @@ body {
   border: none;
   background-color: #007bff;
   color: white;
-  border-radius: 0 4px 4px 0;
+  border-radius:  5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-top: 20px;
 }
 
 .input-group button:hover {

@@ -13,6 +13,7 @@ import Logout from "./components/Logout";
 import ManageDepartment from "./components/ManageDepartment";
 import ManageTasks from "./components/ManageTasks";
 import ManageUser from "./components/ManageUsers";
+import Testimonials from "./components/testimonials";
 
 const App = () => {
   return (
@@ -53,6 +54,10 @@ const App = () => {
           <Route
             path="/manager-users"
             element={<ProtectedRoute component={ManageUser} role="manager" />}
+          />
+          <Route
+            path="/about"
+            element={<Testimonials />}
           />
           <Route path="/logout" element={<Logout />} />
         </Routes>

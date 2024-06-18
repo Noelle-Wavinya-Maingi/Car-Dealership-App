@@ -48,18 +48,8 @@ const Navbar = () => {
               </li>
             )}
             <li className="nav-item">
-              <Link className="nav-link" to="/services">
-                Services
-              </Link>
-            </li>
-            <li className="nav-item">
               <Link className="nav-link" to="/about">
                 About Us
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/contact">
-                Contact
               </Link>
             </li>
             {!user ? (
@@ -77,6 +67,12 @@ const Navbar = () => {
                         Dashboard
                       </Link>
                     </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/about">
+                        About Us
+                      </Link>
+                    </li>
+
                     <li className="nav-item">
                       <Link className="nav-link" to="/manager-users">
                         User Management
