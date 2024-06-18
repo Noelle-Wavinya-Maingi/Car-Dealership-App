@@ -8,11 +8,15 @@
 
 ## Project Description
 
-This project implements a management application for assigning tasks and managing departments within an organization. It follows the MVC (Model-View-Controller) architecture, allowing administrators to create departments, assign tasks, manage employees, and persist changes across sessions.
+This project implements a management application for assigning tasks and managing departments within an organization. It allows administrators to assign managers who create departments, assign tasks, manage employees, and persist changes across sessions.
 
 ### Features
 
-- **System Administrator (Manager Role):**
+- **Manager Role:**
+    - Can change user roles.
+
+
+- **Manager Role:**
   - Create and manage departments.
   - Assign tasks to employees.
   - Edit, delete, and mark tasks as complete.
