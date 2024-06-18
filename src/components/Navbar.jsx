@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useUser } from "../context/UserContext";
+import { FaCar } from "react-icons/fa";
 
 const Navbar = () => {
   const location = useLocation();
@@ -16,7 +17,8 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
       <div className="container">
         <Link className="navbar-brand" to="/">
-          <em>ABC</em>
+          <FaCar />&nbsp;&nbsp;
+          <i>ABC</i>
         </Link>
 
         <button
@@ -31,10 +33,7 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div
-          className="collapse navbar-collapse justify-content-end"
-          id="navbarNav"
-        >
+        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul className="navbar-nav">
             {!user && (
               <li className="nav-item">
@@ -65,11 +64,37 @@ const Navbar = () => {
                 </Link>
               </li>
             ) : (
-              <li className="nav-item">
-                <Link className="nav-link" to="/logout">
-                  Logout
-                </Link>
-              </li>
+              <>
+                {user.role === "manager" && (
+                  <>
+                  <li className="nav-item">
+                      <Link className="nav-link" to="/manager-dashboard">
+                        Dashboard
+                      </Link>
+                      </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/manager/users">
+                        User Management
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/manager/tasks">
+                        Task Management
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/manager/departments">
+                        Department Management
+                      </Link>
+                    </li>
+                  </>
+                )}
+                <li className="nav-item">
+                  <Link className="nav-link" to="/logout">
+                    Logout
+                  </Link>
+                </li>
+              </>
             )}
           </ul>
         </div>

@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 import RoleManagement from "./RoleManagement";
-import axios from "axios";
+import { fetchUsers } from "./api";
 
 const AdminDashboard = () => {
   const { user } = useUser();
@@ -14,16 +15,14 @@ const AdminDashboard = () => {
       console.log("Access denied!");
       navigate("/employee-dashboard");
     } else {
-      fetchUsers();
+      fetchAllUsers();
     }
-  }, [user, navigate]);
+  }, []);
 
-  const fetchUsers = async () => {
+  const fetchAllUsers = async () => {
     try {
-      const res = await axios.get(
-        "https://json-server-vkfa.onrender.com/users"
-      );
-      setUsers(res.data);
+      const users = await fetchUsers() 
+      setUsers(users);
     } catch (error) {
       console.error("Error fetching users: ", error);
       alert("An error occurred. Please try again later.");
@@ -31,9 +30,14 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div>
-      <h1>Admin Dashboard</h1>
+    <div className="container mt-5">
+      <h1 className="mb-4">Admin Dashboard</h1>
+      <div className="card">
+        <div className="card-body">
+          <h2>Welcome {user.name}!</h2>
       <RoleManagement users={users} setUsers={setUsers} />
+    </div>
+    </div>
     </div>
   );
 };

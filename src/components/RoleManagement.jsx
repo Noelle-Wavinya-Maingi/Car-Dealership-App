@@ -43,7 +43,7 @@ const RoleManagement = ({ users, setUsers }) => {
               <tr key={u.id}>
                 <td>{u.name}</td>
                 <td>{u.email}</td>
-                <td>{u.role}</td>
+                <td>{u.role.charAt(0).toUpperCase() + u.role.slice(1)}</td>
                 <td>
                   <select
                     className="form-control"

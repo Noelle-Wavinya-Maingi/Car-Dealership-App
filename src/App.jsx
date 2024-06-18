@@ -11,6 +11,7 @@ import ManagerDashboard from "./components/ManagerDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
 import Logout from "./components/Logout";
+import ManageDepartment from "./components/ManageDepartment";
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
               <ProtectedRoute component={ManagerDashboard} role="manager" />
             }
           />
+          <Route path="/manager/departments" element={<ManageDepartment />} />
           <Route path="/logout" element={<Logout />} />
         </Routes>
       </UserProvider>

@@ -76,7 +76,11 @@ const EmployeeDashboard = () => {
         JSON.stringify([...checkedTasks, taskId])
       );
 
-      alert(`Task '${updatedTask.title}' marked as complete!`);
+      alert(
+        `Task '${
+          updatedTask.title.charAt(0).toUpperCase() + updatedTask.title.slice(1)
+        }' marked as complete!`
+      );
     } catch (error) {
       console.error("Error marking task complete: ", error);
       alert("An error occurred while marking the task as complete.");
@@ -135,7 +139,9 @@ const EmployeeDashboard = () => {
           <div className="task-list">
             {incompleteTasks.map((task) => (
               <div key={task.id} className="task">
-                <h6 className="h6">{task.title}</h6>
+                <h6 className="h6">
+                  {task.title.charAt(0).toUpperCase() + task.title.slice(1)}
+                </h6>
                 <div className="todo">
                   <input
                     type="checkbox"
