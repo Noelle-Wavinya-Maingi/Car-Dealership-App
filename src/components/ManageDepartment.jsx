@@ -4,21 +4,24 @@ import { useUser } from "../context/UserContext";
 import { useEffect, useState } from "react";
 import { createNewDepartment, fetchDepartments, fetchUsers } from "./api";
 import { FaBuilding } from "react-icons/fa";
+import "../assets/css/manageDepartment.css";
 
 const ManageDepartment = () => {
-  const { user } = useUser();
+  const { user, loading } = useUser();
   const navigate = useNavigate();
   const [departments, setDepartments] = useState([]);
   const [newDepartment, setNewDepartment] = useState("");
 
   useEffect(() => {
-    if (!user || user.role !== "manager") {
-      console.log("Access Denied");
-      navigate("/employee-dashboard");
-    } else {
-      getDepartmentsAndUsers();
+    if (!loading) {
+      if (!user || user.role !== "manager") {
+        console.log("Access Denied");
+        navigate("/employee-dashboard");
+      } else {
+        getDepartmentsAndUsers();
+      }
     }
-  }, []);
+  }, [user, loading, navigate]);
 
   const getDepartmentsAndUsers = async () => {
     try {
@@ -29,7 +32,9 @@ const ManageDepartment = () => {
 
       const departmentsWithMemberCount = departmentData.map((department) => ({
         ...department,
-        membersCount: userData.filter((user) => user.departmentId === department.id.toString()).length,
+        membersCount: userData.filter(
+          (user) => user.departmentId === department.id.toString()
+        ).length,
       }));
       setDepartments(departmentsWithMemberCount);
     } catch (error) {
@@ -38,10 +43,15 @@ const ManageDepartment = () => {
     }
   };
 
-  const handleCreateDepartment = async () => {
+  const handleCreateDepartment = async (e) => {
+    e.preventDefault();
+    if (!newDepartment.trim()) return;
     try {
       const department = await createNewDepartment({ name: newDepartment });
-      setDepartments([...departments, { ...department, membersCount: 0 }]);
+      setDepartments((prevDepartments) => [
+        ...prevDepartments,
+        { ...department, membersCount: 0 },
+      ]);
       setNewDepartment("");
     } catch (error) {
       console.error("Error creating department: ", error);
@@ -49,36 +59,42 @@ const ManageDepartment = () => {
   };
 
   return (
-    <div className="manager-container mt-5">
+    <div className="manager-container" style={{ marginTop: "80px" }}>
       <h2 className="mb-4">
         <FaBuilding /> Manage Departments
       </h2>
-      <div className="card mb-4 custom-card">
+      <div
+        className="card mb-4 custom-card"
+        style={{ width: "900px", marginLeft: "30px" }}
+      >
         <div className="card-body">
           <h5 className="card-title">Create Department</h5>
           <form onSubmit={handleCreateDepartment}>
-          <div className="input-group">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Department Name"
-              value={newDepartment}
-              onChange={(e) => setNewDepartment(e.target.value)}
-              required
-            />
-            <button className="btn btn-primary" >
-              Create
-            </button>
-          </div>
+            <div className="input-group">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Department Name"
+                value={newDepartment}
+                onChange={(e) => setNewDepartment(e.target.value)}
+                required
+              />
+              <button className="btn btn-primary">Create</button>
+            </div>
           </form>
         </div>
       </div>
       <h3>Existing Departments</h3>
       <ul className="list-group">
         {departments.map((department) => (
-          <li key={department.id} className="list-group-item d-flex justify-content-between align-items-center">
+          <li
+            key={department.id}
+            className="list-group-item d-flex justify-content-between align-items-center"
+          >
             <span>{department.name}</span>
-            <span className="badge bg-primary rounded-pill">{department.membersCount} Members</span>
+            <span className="badge bg-primary rounded-pill">
+              {department.membersCount} Members
+            </span>
           </li>
         ))}
       </ul>

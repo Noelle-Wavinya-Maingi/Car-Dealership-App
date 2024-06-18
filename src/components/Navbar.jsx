@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 import { FaCar } from "react-icons/fa";
+import "../assets/css/navbar.css";
 
 const Navbar = () => {
   const location = useLocation();
@@ -17,7 +18,8 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
       <div className="container">
         <Link className="navbar-brand" to="/">
-          <FaCar />&nbsp;&nbsp;
+          <FaCar />
+          &nbsp;&nbsp;
           <i>ABC</i>
         </Link>
 
@@ -33,7 +35,10 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <div
+          className="collapse navbar-collapse justify-content-end"
+          id="navbarNav"
+        >
           <ul className="navbar-nav">
             {!user && (
               <li className="nav-item">
@@ -67,23 +72,23 @@ const Navbar = () => {
               <>
                 {user.role === "manager" && (
                   <>
-                  <li className="nav-item">
+                    <li className="nav-item">
                       <Link className="nav-link" to="/manager-dashboard">
                         Dashboard
                       </Link>
-                      </li>
+                    </li>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/manager/users">
+                      <Link className="nav-link" to="/manager-users">
                         User Management
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/manager/tasks">
+                      <Link className="nav-link" to="/manager-tasks">
                         Task Management
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/manager/departments">
+                      <Link className="nav-link" to="/manager-departments">
                         Department Management
                       </Link>
                     </li>

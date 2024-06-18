@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Reddit+Sans+Condensed:wght@200..900&family=Sedan:ital@0;1&display=swap");
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: "Sedan", serif;
+}
+
+body {
+  background: linear-gradient(to right, #a0a1a4, #ffffff);
+  background-size: 200% 100%;
+}
+
+.manage-user-container {
+    width: 100%;
+    width: 1200px;
+    margin-top: 60px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+  }
+  
+  .manage-user-page-title {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .user-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .user-table th,
+  .user-table td {
+    text-align: left;
+    padding: 12px 15px;
+    border-top: 1px solid #ddd;
+  }
+  
+  .user-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .user-table th {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .delete-button {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+  
+  .delete-button:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #ff0000;
+  }
+  

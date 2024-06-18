@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Reddit+Sans+Condensed:wght@200..900&family=Sedan:ital@0;1&display=swap");
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: "Sedan", serif;
+}
+
+body {
+  background: linear-gradient(to right, #a0a1a4, #ffffff);
+  background-size: 200% 100%;
+}
+
+.dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  .card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+    text-align: center;
+    width: 30%;
+  }
+  
+  .card h3 {
+    margin: 0;
+    color: #555;
+  }
+  
+  .card p {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .chart {
+    margin-bottom: 20px;
+  }
+  
+  .leaflet {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fafafa;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .task-title {
+    margin: 0;
+    color: #333;
+  }
+  
+  .todo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .status-pill {
+    background-color: #ff6961;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    margin: 0;
+    margin-top: 10px;
+  }

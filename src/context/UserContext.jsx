@@ -6,12 +6,23 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("currentUser");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
+    const checkUser = async () => {
+      setLoading(true);
+      try {
+        const storedUser = localStorage.getItem("currentUser");
+        if (storedUser) {
+          setUser(JSON.parse(storedUser));
+        }
+      } catch (error) {
+        console.error("Error checking the user: ");
+      } finally {
+        setLoading(false);
+      }
+    };
+    checkUser();
   }, []);
 
   const handleSetUser = (user) => {
@@ -25,7 +36,9 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, setUser: handleSetUser, logout: handleLogout }}>
+    <UserContext.Provider
+      value={{ user, setUser: handleSetUser, logout: handleLogout, loading }}
+    >
       {children}
     </UserContext.Provider>
   );

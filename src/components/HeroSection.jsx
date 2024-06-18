@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import carImage from "../assets/car1.png";
+import "../assets/css/hero.css";
 
 const HeroSection = () => {
   return (

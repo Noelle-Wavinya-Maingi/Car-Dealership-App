@@ -112,3 +112,16 @@ export const removeUser = async (userId) => {
     console.error("Error removing the user: ", error);
   }
 };
+
+// Move an employee to a different department
+export const moveEmployeeToDepartment = async (userId, newDepartmentId) => {
+  try {
+    const res = await axios.patch(`${BASE_URL}/users/${userId}`, {
+      departmentId: newDepartmentId,
+    });
+    return res.data;
+  } catch (error) {
+    console.error("Error moving employee to department: ", error);
+    throw error;
+  }
+};

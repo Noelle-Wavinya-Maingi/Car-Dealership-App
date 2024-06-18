@@ -6,6 +6,7 @@ import signupImage from "../assets/Signup.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 import { fetchUsers } from "./api";
+import "../assets/css/login.css";
 
 const Login = () => {
   const { setUser } = useUser();

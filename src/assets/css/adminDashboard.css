@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Reddit+Sans+Condensed:wght@200..900&family=Sedan:ital@0;1&display=swap");
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: "Sedan", serif;
+}
+
+body {
+  background: linear-gradient(to right, #a0a1a4, #ffffff);
+  background-size: 200% 100%;
+}
+
+.admin-dashboard-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dashboard-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  

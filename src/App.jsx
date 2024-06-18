@@ -9,9 +9,10 @@ import AdminDashboard from "./components/AdminDashboard";
 import EmployeeDashboard from "./components/EmployeeDashboard";
 import ManagerDashboard from "./components/ManagerDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
-import "./App.css";
 import Logout from "./components/Logout";
 import ManageDepartment from "./components/ManageDepartment";
+import ManageTasks from "./components/ManageTasks";
+import ManageUser from "./components/ManageUsers";
 
 const App = () => {
   return (
@@ -39,7 +40,20 @@ const App = () => {
               <ProtectedRoute component={ManagerDashboard} role="manager" />
             }
           />
-          <Route path="/manager/departments" element={<ManageDepartment />} />
+          <Route
+            path="/manager-departments"
+            element={
+              <ProtectedRoute component={ManageDepartment} role="manager" />
+            }
+          />
+          <Route
+            path="/manager-tasks"
+            element={<ProtectedRoute component={ManageTasks} role="manager" />}
+          />
+          <Route
+            path="/manager-users"
+            element={<ProtectedRoute component={ManageUser} role="manager" />}
+          />
           <Route path="/logout" element={<Logout />} />
         </Routes>
       </UserProvider>

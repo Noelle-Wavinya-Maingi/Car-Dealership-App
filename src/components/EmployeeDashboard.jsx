@@ -20,6 +20,7 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+import "../assets/css/employeeDashboard.css";
 
 const EmployeeDashboard = () => {
   const { user } = useUser();
@@ -30,7 +31,6 @@ const EmployeeDashboard = () => {
   const [incompleteCount, setIncompleteCount] = useState(0);
   const [updatingTaskIds, setUpdatingTaskIds] = useState(new Set());
 
-  // Fetch tasks from API and initialize state
   useEffect(() => {
     const getTasks = async () => {
       try {
@@ -43,7 +43,6 @@ const EmployeeDashboard = () => {
     getTasks();
   }, []);
 
-  // Initialize user-specific task counts and lists
   useEffect(() => {
     if (user) {
       const userTasks = tasks.filter((task) => task.userId === user.id);
@@ -54,10 +53,9 @@ const EmployeeDashboard = () => {
     }
   }, [tasks, user]);
 
-  // Handle checkbox change (mark task as complete)
   const handleCheckBoxChange = async (taskId) => {
     if (updatingTaskIds.has(taskId)) {
-      return; // Task is already being updated
+      return;
     }
 
     try {
@@ -68,7 +66,6 @@ const EmployeeDashboard = () => {
       setCompletedCount(completedCount + 1);
       setIncompleteCount(incompleteCount - 1);
 
-      // Store updated checked tasks in local storage
       const checkedTasks =
         JSON.parse(localStorage.getItem("checkedTasks")) || [];
       localStorage.setItem(
@@ -93,7 +90,6 @@ const EmployeeDashboard = () => {
     }
   };
 
-  // Chart data for displaying task completion status
   const chartData = {
     labels: ["Complete", "Incomplete"],
     datasets: [
@@ -101,8 +97,23 @@ const EmployeeDashboard = () => {
         label: "Tasks",
         data: [completedCount, incompleteCount],
         backgroundColor: ["#4caf50", "#ff9800"],
+        borderWidth: 1,
+        borderColor: ["#388e3c", "#f57c00"],
       },
     ],
+  };
+
+  const chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Task Completion Status",
+      },
+    },
   };
 
   if (!user) {
@@ -110,11 +121,11 @@ const EmployeeDashboard = () => {
   }
 
   return (
-    <div className="dashboard">
+    <div className="dashboard" style={{ marginTop: "80px" }}>
       <h1>Welcome, {user.name}</h1>
       <div className="stats">
         <div className="card">
-          <h3>Total tasks</h3>
+          <h3>Total Tasks</h3>
           <p>{totalTasks.length} Tasks</p>
         </div>
         <div className="card">
@@ -127,8 +138,8 @@ const EmployeeDashboard = () => {
         </div>
       </div>
 
-      <div className="chart">
-        <Bar data={chartData} />
+      <div className="chart card" style={{ width: "1000px" }}>
+        <Bar data={chartData} options={chartOptions} />
       </div>
 
       <h2>Your Tasks</h2>
@@ -139,7 +150,7 @@ const EmployeeDashboard = () => {
           <div className="task-list">
             {incompleteTasks.map((task) => (
               <div key={task.id} className="task">
-                <h6 className="h6">
+                <h6 className="task-title">
                   {task.title.charAt(0).toUpperCase() + task.title.slice(1)}
                 </h6>
                 <div className="todo">
@@ -149,7 +160,7 @@ const EmployeeDashboard = () => {
                     disabled={updatingTaskIds.has(task.id)}
                     onChange={() => handleCheckBoxChange(task.id)}
                   />
-                  <p>Status: Incomplete</p>
+                  <p className="status-pill">Incomplete</p>
                 </div>
               </div>
             ))}

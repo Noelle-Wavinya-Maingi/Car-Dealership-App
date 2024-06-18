@@ -1,5 +1,6 @@
 import axios from "axios";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
+import "../assets/css/roleManagement.css";
 
 const RoleManagement = ({ users, setUsers }) => {
   const handleRoleChange = async (userId, newRole) => {
@@ -29,7 +30,10 @@ const RoleManagement = ({ users, setUsers }) => {
     <div className="role-management-container">
       <h2>Role Management</h2>
       <div className="table-responsive">
-        <table className="table table-striped table-bordered" style={{width: "1200px"}}>
+        <table
+          className="table table-striped table-bordered"
+          style={{ width: "1200px" }}
+        >
           <thead className="thead-dark">
             <tr>
               <th>Name</th>
