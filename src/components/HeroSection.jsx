@@ -9,9 +9,9 @@ const HeroSection = () => {
         <div className="hero-left">
           <h1>ABC CAR DEALERSHIP</h1>
           <p>Your trusted partner for car maintenance and management.</p>
-          <Link className="btn" to="/signup">
+          {/* <Link className="btn" to="/login">
             Sign Up
-          </Link>
+          </Link> */}
           &nbsp;&nbsp;&nbsp;&nbsp;
           <Link to="/login" className="btn">
             Login
